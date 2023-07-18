@@ -50,6 +50,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('email:inactive-users')->daily();
         $schedule->command('email:active-users')->daily();
 
+        
 
 		/*
 		 * /usr/local/bin/php /home/pharmacarebd/public_html/artisan sendSMS:everyFiveMinutes
