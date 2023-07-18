@@ -1,0 +1,221 @@
+.int_thpmwidth{
+    max-width: 300px;
+}
+
+.int_tpmb{
+    margin-bottom: 20px
+}
+
+.int_inlinedisp{
+    display:inline
+}
+
+.thmaxwidth{
+    max-width: 300px
+}
+
+.int_pdlforty{
+    padding-left: 40px
+}
+
+.int_hpw{
+    width: 100%
+}
+
+.int_pttwenty{
+    padding-top: 20px
+}
+
+.int_ffminheight{
+    min-height: 440px
+}
+
+.int_thmwpoin{
+    max-width: 300px; cursor: pointer
+}
+
+.int_hide{
+    display: none;
+}
+
+.int_mtdispnone{
+    display: none; margin-top: 10px
+}
+
+.int_mth{
+    margin-bottom: 20px; height: 395px
+}
+
+.int_mh270{
+    max-height: 270px
+}
+
+.int_txcen{
+    text-align: center
+}
+
+.int_fs200{
+    font-size: 200px;
+}
+
+.int_mt10{
+    margin-top: 10px
+}
+
+.int_wm100pc{
+    max-width: 100%
+}
+
+.int_mbh20395{
+    margin-bottom: 20px; height: 395px
+}
+
+.int_fs200{
+    font-size: 200px;
+}
+
+.int_pt10{
+    padding-top: 10px
+}
+.int_curpoin{
+    cursor: pointer
+}
+
+.int_ml50{
+    margin-left: 50px
+}
+
+.tabstyle{
+    border: solid 1px
+    #ccc;
+    border-top: none;
+}
+
+.int_plpr{
+    padding-left: 0px; padding-right: 0px
+}
+
+.int_margintb20p{
+    margin-top: 20px; margin-bottom: 20px
+}
+
+.int_ml0{
+    margin-left: 0px;
+}
+
+.int_tm20{
+    margin-top: 20px
+}
+
+.int_green{
+    color:green;
+}
+
+.int_red{
+    color:red
+}
+
+.int_mt0p{
+    margin-top: 0px
+}
+
+.int_mt60{
+    margin-top: 60px;
+}
+
+.int_tcmb{
+    text-align: center; margin-bottom: 40px
+}
+
+.int_fs80{
+    font-size: 80px;
+}
+
+ .int_mxw300{
+     max-width: 300px;
+ }
+
+ .int_mh270{
+     max-height: 270px
+ }
+
+ .int_fs200{
+     font-size: 200px;
+ }
+
+ .int_w330cur{
+     max-width: 300px; cursor: pointer
+ }
+
+ .int_pldpr50{
+     padding-left:50px; padding-right:50px
+ }
+
+ .int_twmb20{
+     text-wrap: normal; margin-bottom: 20px
+ }
+
+ .int_mbh{
+     margin-bottom: 20px; height: 345px
+ }
+
+ .int_overvis{
+     overflow: visible
+ }
+
+.int_pdt30{
+    padding-top: 30px
+}
+
+.int_mb30px{
+    margin-bottom: 30px
+}
+
+.int_mt30px{
+    margin-top: 30px
+}
+
+.int_mb60{
+    margin-bottom: 60px
+}
+
+.int_colorstyle{
+    width: 50px; height: 50px; margin: 0px auto;
+}
+
+.int_mt20pl30{
+    margin-top: 20px; padding-left: 30px;
+}
+
+.int_fs14{
+    font-size: 14px
+}
+
+.int_mb50{
+    margin-bottom: 50px
+}
+
+.int_pd10{
+    padding-right: 10px; padding-left: 10px
+}
+
+.int_mb10{
+    margin-bottom: 10px
+}
+
+.int_btxa{
+    background-color: transparent;border: 2px solid #295684; color: #718eab;;
+    border-radius: 5px;
+}
+
+.int_mrl50{
+    margin-right: 50px; margin-left:50px
+}
+
+.int_imgmaxwh{
+    max-width: 120px; max-height: 120px
+}
+
+.int_wi18re{
+    width: 18rem;
+}
