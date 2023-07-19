@@ -2,29 +2,26 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\PendingAssignmentsReminderMail;
 use App\User;
-use App\Mail\InactiveUserEmail;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class SendInactiveUserEmails extends Command
+class SendReminderToPendingAssignments extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'email:inactive-users';
+    protected $signature = 'email:reminder-for-pending-assignments';
 
-    
-    
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Send email to inactive users who have not logged in for a week.';
+    protected $description = 'Send Email to students who have not submitted there assignments yet';
 
     /**
      * Create a new command instance.
@@ -43,12 +40,12 @@ class SendInactiveUserEmails extends Command
      */
     public function handle()
     {
-        // Get users who haven't logged in for a week (other than admin)
+        // Get users who haven't Submitted there assignments
         $inactiveUsers = User::where('role_id','!=',1)->where('last_login', '=', now()->subWeek())->get();
         // Send email to each inactive user
         foreach ($inactiveUsers as $user) {
             // Use Laravel's built-in Mail facade to send the email
-            Mail::to($user->email)->send(new InactiveUserEmail($user));
+            Mail::to($user->email)->send(new PendingAssignmentsReminderMail($user));
         }
 
         $this->info('Inactive user emails sent successfully.');

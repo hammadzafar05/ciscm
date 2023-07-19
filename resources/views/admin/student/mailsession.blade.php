@@ -48,7 +48,8 @@
                     <div class="card-body">
                         <form method="post"
                               class="form-horizontal"
-                              action="{{  adminUrl(array('controller'=>'student','action'=>'mailsession','id'=>$id)) }}">
+                              {{-- action="{{  adminUrl(array('controller'=>'student','action'=>'mailsession','id'=>$id)) }}"> --}}
+                              action="{{  url()->current() }}">
                             @csrf
                             {{--@if($students->count() > 0)--}}
                             @if($id > 0)

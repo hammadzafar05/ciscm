@@ -43,8 +43,8 @@ class SendActiveUserEmails extends Command
      */
     public function handle()
     {
-        // Get users who have logged in within the last week
-        $activeUsers = User::where('role_id',2)->where('last_login', '>=', now()->subWeek())->get();
+        // Get users who have logged in within the last week (other than admin)
+        $activeUsers = User::where('role_id','!=',1)->where('last_login', '>=', now()->subWeek())->get();
         // Send email to each active user
         foreach ($activeUsers as $user) {
             // Use Laravel's built-in Mail facade to send the email

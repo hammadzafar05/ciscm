@@ -924,7 +924,6 @@ class TestController extends Controller
 	}
 	
 	public function addsession(Request $request,$id){
-		
 		$sessionTestTable = new SessionTestTable();
 		$testTable = new TestTable();
 		$testRow = $testTable->getRecord($id);

@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\User;
+use App\Student;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\DB;
@@ -27,12 +28,17 @@ class InactiveUserEmail extends Mailable
 
     public function build()
     {
-        $data = DB::table('student_courses')
-        ->leftJoin('courses', 'id', '=', 'student_courses.course_id')
-        ->leftJoin('users', 'id', '=', 'student_courses.student_id')
-        ->where('student_courses.student_id', '=', $this->user->id)
-        ->select('users.id', 'users.name', 'courses.name')
-        ->first();
+        // $data = DB::table('student_courses')
+        // ->leftJoin('courses', 'id', '=', 'student_courses.course_id')
+        // ->leftJoin('users', 'id', '=', 'student_courses.student_id')
+        // ->where('student_courses.student_id', '=', $this->user->id)
+        // ->select('users.id', 'users.name', 'courses.name')
+        // ->first();
+
+        $data = Student::with(['user'=>function($query){
+            $query->where('id',$this->user->id);
+        },'studentCourses.course:id,name'])->first()->toArray();
+
         return $this->subject('Reminder Email (World Academy)')
         ->view('emails.inactive_user')
         ->with([

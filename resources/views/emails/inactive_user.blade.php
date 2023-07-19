@@ -4,11 +4,13 @@
     <title>World Academy Enrollment</title>
 </head>
 <body>
-    <p>Dear {{ $data->users.name }},</p>
+    {{-- <p>Dear {{ $data->users.name }},</p> --}}
+    <p>Dear {{ $data['user']['name'] }},</p>
 
     <p>Greetings from World Academy!</p>
 
-    <p>Thanks for your enrollment for {{ $data->courses.name }}. Please note the below information regarding the course management:</p>
+    {{-- <p>Thanks for your enrollment for {{ $data->courses.name }}. Please note the below information regarding the course management:</p> --}}
+    <p>Thanks for your enrollment for {{ $data['student_courses'][0]['course']['name'] }}. Please note the below information regarding the course management:</p>
 
     <ul>
         <li>You will get all materials in the learning management portal.</li>

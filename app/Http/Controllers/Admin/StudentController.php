@@ -3119,7 +3119,7 @@ class StudentController extends Controller
 	        }
 
             
-            return redirect(selfURL());
+            return redirect()->back();
             // return adminRedirect(['controller'=>'student','action'=>'sessions']);
         }
 
