@@ -5,6 +5,7 @@ namespace App\Console;
 
 use App\Console\Commands\cronSendScheduleEmail;
 use App\Console\Commands\cronSendScheduleSMS;
+use App\Console\Commands\SendReminderToPendingAssignments;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,7 +18,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
 	    cronSendScheduleSMS::class,
-	    cronSendScheduleEmail::class
+	    cronSendScheduleEmail::class,
+        SendReminderToPendingAssignments::class
     ];
 
     /**
@@ -49,6 +51,7 @@ class Kernel extends ConsoleKernel
 	    $schedule->command('sendEmail:everyFiveMinutes')->everyFiveMinutes();
         $schedule->command('email:inactive-users')->daily();
         $schedule->command('email:active-users')->weeklyOn(1, '8:00');//run on every monday at 8:00 am
+        $schedule->command('email:reminder-for-pending-assignments')->dailyAt('8:00');//daily at 8:00 am
 
 
 		/*

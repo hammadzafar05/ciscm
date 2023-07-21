@@ -111,7 +111,7 @@
 <div class="card">
     <div class="card-header">{{ __lang('grade-homework') }}</div>
     <div class="card-body">
-        <form class="form" action="{{ selfURL() }}" method="post">
+        <form class="form" action="{{ url()->current() }}" method="post">
             @csrf
         <div class="form-group">
             {{ formLabel($form->get('admin_comment')) }}

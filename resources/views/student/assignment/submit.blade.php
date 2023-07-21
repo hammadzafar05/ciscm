@@ -26,7 +26,7 @@
 <div class="card card-success">
     <div class="card-header">{{  __lang('answer')  }}</div>
     <div class="card-body">
-        <form enctype="multipart/form-data" class="form" action="{{  selfURL()  }}" method="post">
+        <form enctype="multipart/form-data" class="form" action="{{  url()->current()  }}" method="post">
             @csrf
         @php  if($row->type=='t' || $row->type=='b'): @endphp
             <div class="form-group">

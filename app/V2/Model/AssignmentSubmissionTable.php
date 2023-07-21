@@ -21,7 +21,6 @@ class AssignmentSubmissionTable extends BaseTable {
     //protected $primary = 'assignment_submission_id';
 
 
-
     public function getAssignmentPaginatedRecords($paginated=false,$id,$submitted=1)
     {
         $select = new Select($this->tableName);
