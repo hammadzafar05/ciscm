@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use App\Student;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\DB;
@@ -44,10 +45,14 @@ class ActiveUserEmail extends Mailable
             $query->where('id',$this->user->id);
         },'studentCourses.course:id,name'])->first()->toArray();
 
+        $lastLoginDate = Carbon::parse($data['user']['last_login']);
+        $lastLoginDate = $lastLoginDate->format('F jS, Y');
+
         return $this->subject('Appreciation Email (World Academy)')
         ->view('emails.active_user')
         ->with([
             'data' => $data,
+            'lastLoginDate'=>$lastLoginDate
         ]);
     }
 }

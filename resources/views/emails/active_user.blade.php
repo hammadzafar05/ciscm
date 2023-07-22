@@ -12,11 +12,11 @@
 
     <p>It is appreciable that you have decided to develop your professional competency despite of the busy schedule.</p>
 
-    <p>You have last logged in to the dashboard on [date]. Congratulations! You are maintaining the schedule like
+    <p>You have last logged in to the dashboard on {{ $lastLoginDate }}. Congratulations! You are maintaining the schedule like
         professionals!</p>
     <p>Keep it up. SUCCESS will follow you.</p>
 
-    <p>If you need any assistance, please contact us via WhatsApp at +8801792380380 or email us at info@worldacademy.uk.
+    <p>If you need any assistance, please contact us via WhatsApp at +8801792380380 or email us at <a href="mailto:info@worldacademy.uk">info@worldacademy.uk</a>.
     </p>
 
     <p>Happy learning ahead!</p>

@@ -44,7 +44,7 @@ class SendInactiveUserEmails extends Command
     public function handle()
     {
         // Get users who haven't logged in for a week (other than admin)
-        $inactiveUsers = User::where('role_id','!=',1)->where('last_login', '=', now()->subWeek())->get();
+        $inactiveUsers = User::where('role_id','!=',1)->where('last_login', '<', now()->subWeek())->get();
         // Send email to each inactive user
         foreach ($inactiveUsers as $user) {
             // Use Laravel's built-in Mail facade to send the email

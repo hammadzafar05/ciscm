@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use App\User;
 use App\Student;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\DB;
@@ -38,11 +39,20 @@ class InactiveUserEmail extends Mailable
         $data = Student::with(['user'=>function($query){
             $query->where('id',$this->user->id);
         },'studentCourses.course:id,name'])->first()->toArray();
+        
+        $lastLoginDate = Carbon::parse($data['user']['last_login']);
+        $lastLoginDate = $lastLoginDate->format('F jS, Y');
+
+        $date = Carbon::parse($data['user']['last_login']);
+        $now = Carbon::now();
+        $days = $date->diffInDays($now);
 
         return $this->subject('Reminder Email (World Academy)')
         ->view('emails.inactive_user')
         ->with([
             'data' => $data,
+            'lastLoginDate'=>$lastLoginDate,
+            'numberOfDays'=>$days
         ]);
     }
 }

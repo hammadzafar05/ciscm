@@ -7,19 +7,13 @@
     {{-- <p>Dear {{ $data->users.name }},</p> --}}
     <p>Dear {{ $data['user']['name'] }},</p>
 
-    <p>Greetings from World Academy!</p>
+    <p>Thanks for your enrollment for {{ $data['student_courses'][0]['course']['name'] }}.</p>
 
-    {{-- <p>Thanks for your enrollment for {{ $data->courses.name }}. Please note the below information regarding the course management:</p> --}}
-    <p>Thanks for your enrollment for {{ $data['student_courses'][0]['course']['name'] }}. Please note the below information regarding the course management:</p>
+    <p>It is appreciable that you have decided to develop your professional competency despite of the busy schedule. You have last logged in to the dashboard on {{ $lastLoginDate }}. So for the last {{ $numberOfDays }} you could not able to log in to the system.</p>
 
-    <ul>
-        <li>You will get all materials in the learning management portal.</li>
-        <li>Please find the <a href="#">attachment</a> or click <a href="#">here</a> to get the operational guideline for the learning management system.</li>
-        <li>You will receive notifications through the WhatsApp group/email.</li>
-        <li>For any immediate assistance, please contact <a href="tel:+8801792380380">+8801792380380</a> (WhatsApp is available).</li>
-    </ul>
+    <p>If you need any assistance please contact us via whatsapp +8801792380380 or email us <a href="mailto:info@worldacademy.uk">info@worldacademy.uk</a></p>
 
-    <p>Footer Note: World Academy is one of the pioneer Professional Education & Certification institutes, operating in 57 countries and constantly expanding. We have proudly graduated over 15,000 professionals from our institute.</p>
+    <p>Happy learning ahead!</p>
 
     <p>Best regards,</p>
     <p>World Academy for Research & Development [WARD]</p>

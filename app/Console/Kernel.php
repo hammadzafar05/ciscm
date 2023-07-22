@@ -49,8 +49,10 @@ class Kernel extends ConsoleKernel
 	
 	    $schedule->command('sendSMS:everyFiveMinutes')->everyFiveMinutes();
 	    $schedule->command('sendEmail:everyFiveMinutes')->everyFiveMinutes();
-        $schedule->command('email:inactive-users')->daily();
-        $schedule->command('email:active-users')->weeklyOn(1, '8:00');//run on every monday at 8:00 am
+        
+        $schedule->command('email:inactive-users')->weeklyOn(5, '8:00');//run on every friday at 8:00 am
+        $schedule->command('email:active-users')->weeklyOn(5, '8:00');//run on every friday at 8:00 am
+
         $schedule->command('email:reminder-for-pending-assignments')->dailyAt('8:00');//daily at 8:00 am
 
 
