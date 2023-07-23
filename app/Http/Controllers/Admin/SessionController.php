@@ -10,6 +10,7 @@ use App\Invoice;
 use App\Lesson;
 use App\Lib\BaseForm;
 use App\Lib\HelperTrait;
+use App\Mail\FinalResultPublicationMail;
 use App\Model\ScheduleSms;
 use App\Student;
 use App\User;
@@ -34,6 +35,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Text;
 use Laminas\InputFilter\InputFilter;
@@ -1174,6 +1176,19 @@ class SessionController extends Controller
 					'result_passing_year' => $request->input('result_passing_year')
 				]);
 			$row = $studentSessionTable->getRecord($id);
+
+            $student = Student::with('user:id,email,name')->find($row->student_id);
+
+            $course = Course::find($row->course_id);
+    
+            $data = [
+                'userName'=>$student->user->name,
+                'courseName'=>$course ? $course->name : 'Unknown' ,
+                'result'=>$request->input('result_grade')
+            ];
+
+            Mail::to($student->user->email)->send(new FinalResultPublicationMail($data));
+
 			session()->flash('flash_message',__lang('changes-saved'));
 			//return adminRedirect(['controller'=>'session','action'=>'tests','id'=>$sessionRow->id]);
 			return adminRedirect(array('controller'=>'student','action'=>'sessionstudents','id'=>$row->course_id));
