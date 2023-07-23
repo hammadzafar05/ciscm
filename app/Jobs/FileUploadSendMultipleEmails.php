@@ -12,22 +12,19 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class SendMultipleEmails implements ShouldQueue
+class FileUploadSendMultipleEmails implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $user;
-    protected $lectureId;
-
     /**
      * Create a new job instance.
      *
      * @param array $user
      */
-    public function __construct(array $data, $id)
+    public function __construct(array $data)
     {
         $this->user = $data;
-        $this->lectureId = $id;
     }
 
     /**
@@ -37,9 +34,8 @@ class SendMultipleEmails implements ShouldQueue
      */
     public function handle()
     {
-        $lectureName=Lecture::find($this->lectureId)->title;
         foreach ($this->user as $data) {
-            Mail::to($data['email'])->send(new FileUploadedEmail($data['name'], $lectureName));
+            Mail::to($data['student']['user']['email'])->send(new FileUploadedEmail($data['student']['user']['name'],$data['lecture']['title']));
         }
     }
 }

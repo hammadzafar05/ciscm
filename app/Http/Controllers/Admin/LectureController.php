@@ -15,12 +15,15 @@ use App\V2\Form\LectureFilter;
 use App\V2\Model\LectureTable;
 use Laminas\Form\Element\File;
 use Laminas\InputFilter\Input;
-use App\Jobs\SendMultipleEmails;
+use App\Jobs\FileUploadSendMultipleEmails;
 use Laminas\Validator\File\Size;
 use App\V2\Model\LectureFileTable;
 use App\V2\Model\LecturePageTable;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendMultipleEmails;
+use App\Student;
+use App\StudentLecture;
 use Laminas\InputFilter\InputFilter;
 use Laminas\Validator\File\Extension;
 use Illuminate\Support\Facades\Validator;
@@ -352,6 +355,15 @@ class LectureController extends Controller
                 $data['id'] = $formData['id'];
                 $table->saveRecord($data);
                 $table->arrangeSortOrders($id);
+
+                // $data = DB::table('student_lectures')
+                // ->leftJoin('users', 'id', '=', 'student_lectures.student_id')
+                // ->where('student_lectures.lecture_id', '=', $id)
+                //     ->select('users.email')
+                //     ->get()->toArray();
+                $data = StudentLecture::with(['student.user:id,name,email','lecture:id,title'])->where('lecture_id',$id)->get()->toArray();
+                dispatch(new FileUploadSendMultipleEmails($data));
+
                 session()->flash('flash_message',__lang('Content added'));
             }
             else{

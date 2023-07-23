@@ -47,7 +47,7 @@ class SendInactiveUserEmails extends Command
         $inactiveUsers = User::where('role_id','!=',1)->where('last_login', '<', now()->subWeek())->get();
         // Send email to each inactive user
         foreach ($inactiveUsers as $user) {
-            // Use Laravel's built-in Mail facade to send the email
+            /// Use Laravel's built-in Mail facade to send the email
             Mail::to($user->email)->send(new InactiveUserEmail($user));
         }
 
