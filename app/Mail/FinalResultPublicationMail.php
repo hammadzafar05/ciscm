@@ -36,6 +36,5 @@ class FinalResultPublicationMail extends Mailable
         ->with([
             'data' => $this->data
         ]);
-        return $this->view('view.name');
     }
 }

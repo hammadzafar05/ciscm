@@ -288,7 +288,7 @@ class CourseController extends Controller {
 	    $course_name = @$course_name[0];
 	    $course['name'] = $course_name;
 	    /*--MARUF END--*/
-	
+
 	    $studentId = $this->getId();
 	    $lectureId = $lecture->id;
         $sessionId = $course->id;

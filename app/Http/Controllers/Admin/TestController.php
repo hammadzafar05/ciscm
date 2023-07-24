@@ -941,6 +941,7 @@ class TestController extends Controller
 				//$data['closing_date']= getDateString($data['closing_date']);
 				$data['closing_date']= ($data['closing_date']);
 				$sessionTestTable->addRecord($data);
+
 				session()->flash('flash_message',__lang('course-added-succ'));
 				return adminRedirect(['controller'=>'test','action'=>'sessions','id'=>$id]);
 				
