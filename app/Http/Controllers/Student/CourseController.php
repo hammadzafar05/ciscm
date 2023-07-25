@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Student;
 use App\Admin;
 use App\Http\Controllers\Controller;
 use App\Lib\HelperTrait;
+use App\Mail\CourseCompletedMail;
 use App\User;
 use App\V2\Form\DiscussionForm;
 use Illuminate\Http\Request;
@@ -18,6 +19,8 @@ use Illuminate\Http\Request;
 use App\Lecture;
 use App\Lesson;
 use App\Course;
+use App\Student;
+use App\StudentCourse;
 use App\Video;
 use App\V2\Model\AccountsTable;
 use App\V2\Model\AssignmentSubmissionTable;
@@ -44,6 +47,7 @@ use App\V2\Model\StudentVideoTable;
 use App\V2\Model\TestTable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Laminas\EventManager\EventManagerInterface;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\Session\Container;
@@ -731,6 +735,17 @@ class CourseController extends Controller {
                         $studentLectureTable->clearLecture($this->getId(),$session);
                         $studentSessionTable = new StudentSessionTable();
                         $studentSessionTable->markCompleted($this->getId(),$session);
+
+                        $studentInfo = Student::with('user')->find($this->getId());
+                        $dateOfRegistration = StudentCourse::where('course_id',$session)->where('student_id',$this->getId())->first()->created_at;
+                        $data =[
+                            'userName'=>$studentInfo->user->name,
+                            'courseName'=>Course::find($session)->name,
+                            'registrationDate'=>Carbon::parse()->format('d M Y'),
+                        ];
+
+                        Mail::to($studentInfo->user->email)->send(new CourseCompletedMail($data));
+
                         flashMessage(__lang('course-complete-msg'));
                         return redirect()->route('student.catalog.course',['id'=>$session]);
                     }
