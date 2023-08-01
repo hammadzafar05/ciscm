@@ -1252,6 +1252,9 @@ class SessionController extends Controller
                 $data['opening_date']= getDateString($data['opening_date']);
                 $data['closing_date']=getDateString($data['closing_date']);
                 $sessionTestTable->addRecord($data);
+
+                
+
                 session()->flash('flash_message',__lang('Test added successfully'));
                 return adminRedirect(['controller'=>'session','action'=>'tests','id'=>$id]);
 

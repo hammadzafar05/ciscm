@@ -13,7 +13,7 @@
 @section('content')
     <div class="card">
     <div class="card-body">
-        <form class="form" action="{{ selfURL() }}" method="post">
+        <form class="form" action="{{ url()->current() }}" method="post">
             @csrf
             <div class="form-group">
                 {{ formLabel($form->get('test_id')) }}

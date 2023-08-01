@@ -11,6 +11,7 @@ use App\Admin;
 use App\Http\Controllers\Controller;
 use App\Lib\HelperTrait;
 use App\Mail\CourseCompletedMail;
+use App\Mail\ModuleCompletedNotificationMail;
 use App\User;
 use App\V2\Form\DiscussionForm;
 use Illuminate\Http\Request;
@@ -725,6 +726,15 @@ class CourseController extends Controller {
 					//dd($nextClass);
                     if($nextClass){
                         /*dd('redirect to next class');*/
+
+                        $studentInfo = Student::with('user')->find($this->getId());
+                        $data =[
+                            'userName'=>$studentInfo->user->name,
+                            'moduleName'=>Lesson::find($lectureRow->lesson_id)->name
+                        ];
+
+                        Mail::to($studentInfo->user->email)->send(new ModuleCompletedNotificationMail($data));
+
                         return redirect()->route(MODULE.'.course.class',['course'=>$session,'lesson'=>$nextClass->lesson_id]); // Redirect to course Page
 
 	                   

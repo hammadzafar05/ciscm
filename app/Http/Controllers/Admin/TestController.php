@@ -6,14 +6,17 @@ use Dompdf\Options;
 
 
 use App\Course;
+use App\CourseTest;
 use App\Helper\AppHelper;
 use App\Http\Controllers\Controller;
 use App\Lib\BaseForm;
 use App\Lib\BaseTable;
 use App\Lib\HelperTrait;
+use App\Mail\ExamResultPublishedMail;
 use App\Model\ScheduleEmail;
 use App\QuestionBankOption;
 use App\Student;
+use App\StudentTest;
 use App\Test;
 use App\TestOption;
 use App\TestQuestion;
@@ -36,6 +39,7 @@ use Barryvdh\DomPDF\PDF;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Laminas\Form\Element;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Text;
@@ -1270,6 +1274,13 @@ class TestController extends Controller
 		
 		if($loop == $ready){
 			$studentTestTable->update(['score' => $score, 'status' => 'Evaluated'], $student_tests_id);
+
+			$student = StudentTest::find($student_tests_id);
+			$courseName = Course::find(CourseTest::find($student->test->id)->course_id)->name;
+			$obtainedMarks = $request->input('mark');
+
+			Mail::to($student->student->user->email)->send(new ExamResultPublishedMail($student->student->user->name,$courseName,$obtainedMarks));
+
 			return AppHelper::RespondWithSuccess(
 				'Result has been updated successfully',
 				''
